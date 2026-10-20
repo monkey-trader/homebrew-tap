@@ -5,12 +5,12 @@
 class TipServer < Formula
   desc "Trading-Journal-Backend mit automatischem BingX-Import (lokale HTTP-API)"
   homepage "https://github.com/monkey-trader/trading-intelligence-platform"
-  version "1.0.0"
+  version "1.1.0"
   depends_on :macos
 
   if Hardware::CPU.intel?
-    url "https://github.com/monkey-trader/trading-intelligence-platform/releases/download/v1.0.0/tip-server_1.0.0_darwin_amd64.tar.gz"
-    sha256 "de1c3d598cd6b979f51fe99139b6447eb841397902e2cc0b9fd75180d5365408"
+    url "https://github.com/monkey-trader/trading-intelligence-platform/releases/download/v1.1.0/tip-server_1.1.0_darwin_amd64.tar.gz"
+    sha256 "81306f039863c6a700c53ee584425a48994c5d4562e44465f4ce13e87942cd53"
 
     define_method(:install) do
       bin.install "tip-server"
@@ -24,8 +24,8 @@ class TipServer < Formula
     end
   end
   if Hardware::CPU.arm?
-    url "https://github.com/monkey-trader/trading-intelligence-platform/releases/download/v1.0.0/tip-server_1.0.0_darwin_arm64.tar.gz"
-    sha256 "b7a926e8d22db7e3a1f53629e8409fc727db9c9bdef2e0f37937ac0594880aea"
+    url "https://github.com/monkey-trader/trading-intelligence-platform/releases/download/v1.1.0/tip-server_1.1.0_darwin_arm64.tar.gz"
+    sha256 "1584958247cde719acaf23d6423b9a9daa6c59fe80466f782e84be9f59607eee"
 
     define_method(:install) do
       bin.install "tip-server"
