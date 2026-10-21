@@ -1,13 +1,12 @@
 cask "trading-intelligence-app" do
-  version "1.6.3"
-  sha256 "4717b421274f646436133430eb085829772e10d73ba4e2cbfd14d8b3f3c67214"
+  version "1.6.4"
+  sha256 "0f1fa04b0b37caff35990cb8d237f7ba47d335cade9ba9ab109aaeb15d84ec0e"
 
   url "https://github.com/monkey-trader/trading-intelligence-platform/releases/download/v#{version}/trading-intelligence-app_#{version}_darwin_universal.zip"
   name "Trading Intelligence"
-  desc "Mac-App für das Trading-Journal mit BingX-Import (Fenster auf trading-intelligence)"
+  desc "Trading-Journal mit BingX-Import (Mac-App mit eingebautem Server)"
   homepage "https://github.com/monkey-trader/trading-intelligence-platform"
 
-  depends_on formula: "monkey-trader/tap/trading-intelligence"
   depends_on macos: :big_sur
 
   app "Trading Intelligence.app"
@@ -19,11 +18,16 @@ cask "trading-intelligence-app" do
   end
 
   # Nur Fenster-Einstellungen; die Datenbank (journal.db) bleibt bewusst erhalten.
-  zap trash: "~/Library/Application Support/tip/window.json"
+  zap trash: [
+    "~/Library/Application Support/tip/window.json",
+    "~/Library/Application Support/tip/server.log",
+  ]
 
   caveats <<~EOS
-    Die App ist nur ein Fenster auf den Dienst trading-intelligence. Der Dienst muss laufen:
-      brew services start trading-intelligence
-    BingX-Keys (nur Lese-Rechte) stehen in ~/.config/tip/env, siehe README.
+    Die App startet ihren Server selbst; der Import läuft, solange die App offen ist.
+    BingX-Keys (nur Lese-Rechte) stehen in ~/.config/tip/env:
+      mkdir -p ~/.config/tip && chmod 700 ~/.config/tip
+      printf 'BX_KEY=...\nBX_SECRET=...\n' > ~/.config/tip/env && chmod 600 ~/.config/tip/env
+    Läuft schon der Brew-Dienst trading-intelligence, nutzt die App diesen.
   EOS
 end
