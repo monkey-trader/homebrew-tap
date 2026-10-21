@@ -1,6 +1,6 @@
 cask "trading-intelligence-app" do
-  version "1.6.2"
-  sha256 "93682b590e047e2cd1c9c66254f547f71bd55cfe3118de1ecd4a0118b14860dd"
+  version "1.6.3"
+  sha256 "4717b421274f646436133430eb085829772e10d73ba4e2cbfd14d8b3f3c67214"
 
   url "https://github.com/monkey-trader/trading-intelligence-platform/releases/download/v#{version}/trading-intelligence-app_#{version}_darwin_universal.zip"
   name "Trading Intelligence"
@@ -8,7 +8,7 @@ cask "trading-intelligence-app" do
   homepage "https://github.com/monkey-trader/trading-intelligence-platform"
 
   depends_on formula: "monkey-trader/tap/trading-intelligence"
-  depends_on macos: ">= :big_sur"
+  depends_on macos: :big_sur
 
   app "Trading Intelligence.app"
 
