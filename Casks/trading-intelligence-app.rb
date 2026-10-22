@@ -1,6 +1,6 @@
 cask "trading-intelligence-app" do
-  version "1.7.0"
-  sha256 "f088a874e36fb2850e178306bc1806fa21888a474503692856c775d7b1762f9e"
+  version "1.7.1"
+  sha256 "3afb21ab9d4ef02b40053c3d5874b2f772f2346612aeb2c537ac613333b2148e"
 
   url "https://github.com/monkey-trader/trading-intelligence-platform/releases/download/v#{version}/trading-intelligence-app_#{version}_darwin_universal.zip"
   name "Trading Intelligence"
@@ -12,15 +12,15 @@ cask "trading-intelligence-app" do
   app "Trading Intelligence.app"
 
   # Die App ist nur ad-hoc signiert (keine Apple-Developer-ID). Ohne diesen Schritt blockiert Gatekeeper den Start.
-  postflight do
-    system_command "/usr/bin/xattr",
-                   args: ["-dr", "com.apple.quarantine", "#{appdir}/Trading Intelligence.app"]
+  postflight_steps do
+    run "/usr/bin/xattr",
+        args: ["-dr", "com.apple.quarantine", "{{appdir}}/Trading Intelligence.app"]
   end
 
   # Nur Fenster-Einstellungen; die Datenbank (journal.db) bleibt bewusst erhalten.
   zap trash: [
-    "~/Library/Application Support/tip/window.json",
     "~/Library/Application Support/tip/server.log",
+    "~/Library/Application Support/tip/window.json",
   ]
 
   caveats <<~EOS
