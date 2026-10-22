@@ -1,6 +1,6 @@
 cask "trading-intelligence-app" do
-  version "1.6.5"
-  sha256 "cf6614c5c495b82be19c9b0bc128ec0005c09bc00f533eb4294d8ff7e9027f6e"
+  version "1.6.6"
+  sha256 "a685b19b11dc96d8f306364c482d93dad55720edb1b5807f614201691c0f882b"
 
   url "https://github.com/monkey-trader/trading-intelligence-platform/releases/download/v#{version}/trading-intelligence-app_#{version}_darwin_universal.zip"
   name "Trading Intelligence"
