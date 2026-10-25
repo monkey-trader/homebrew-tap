@@ -5,12 +5,12 @@
 class TradingIntelligence < Formula
   desc "Trading-Journal-Backend mit automatischem BingX-Import (lokale HTTP-API)"
   homepage "https://github.com/monkey-trader/trading-intelligence-platform"
-  version "1.7.1"
+  version "2.0.0"
   depends_on :macos
 
   if Hardware::CPU.intel?
-    url "https://github.com/monkey-trader/trading-intelligence-platform/releases/download/v1.7.1/trading-intelligence_1.7.1_darwin_amd64.tar.gz"
-    sha256 "1e6e69b438b82b5c5a73005a9dcb14e47f0539abbbcab35862230961e34fc207"
+    url "https://github.com/monkey-trader/trading-intelligence-platform/releases/download/v2.0.0/trading-intelligence_2.0.0_darwin_amd64.tar.gz"
+    sha256 "75fad8c9d9cc60b392d528669a3c58e8537c3b9fdc8ff3484e17b80af29f1b56"
 
     define_method(:install) do
       bin.install "trading-intelligence"
@@ -24,8 +24,8 @@ class TradingIntelligence < Formula
     end
   end
   if Hardware::CPU.arm?
-    url "https://github.com/monkey-trader/trading-intelligence-platform/releases/download/v1.7.1/trading-intelligence_1.7.1_darwin_arm64.tar.gz"
-    sha256 "0e74790e7524b02e7a49ea82b82fb2be8926ebe9a3f5410c81f9bc7c637c0a9c"
+    url "https://github.com/monkey-trader/trading-intelligence-platform/releases/download/v2.0.0/trading-intelligence_2.0.0_darwin_arm64.tar.gz"
+    sha256 "7d65d82bd55e6361db65e217af2b483af23e756077049eb650d43c0335345aef"
 
     define_method(:install) do
       bin.install "trading-intelligence"
