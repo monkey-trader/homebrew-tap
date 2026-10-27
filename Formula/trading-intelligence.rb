@@ -5,15 +5,16 @@
 class TradingIntelligence < Formula
   desc "Trading-Journal-Backend mit automatischem BingX-Import (lokale HTTP-API)"
   homepage "https://github.com/monkey-trader/trading-intelligence-platform"
-  version "2.4.0"
+  version "2.5.0"
   depends_on :macos
 
   if Hardware::CPU.intel?
-    url "https://github.com/monkey-trader/trading-intelligence-platform/releases/download/v2.4.0/trading-intelligence_2.4.0_darwin_amd64.tar.gz"
-    sha256 "32f1ab283bb766f8e9bc1ecd14cb94e01395660300c75e2b40987bdd4d10b39d"
+    url "https://github.com/monkey-trader/trading-intelligence-platform/releases/download/v2.5.0/trading-intelligence_2.5.0_darwin_amd64.tar.gz"
+    sha256 "0e02bb2a9981abbfca1329bc113b31bcff1a122565cc18268d0c064f6b47e555"
 
     define_method(:install) do
       bin.install "trading-intelligence"
+      bin.install "trading-intelligence-mcp"
       (bin/"trading-intelligence-service").write <<~SH
         #!/bin/sh
         ENV_FILE="${HOME}/.config/tip/env"
@@ -24,11 +25,12 @@ class TradingIntelligence < Formula
     end
   end
   if Hardware::CPU.arm?
-    url "https://github.com/monkey-trader/trading-intelligence-platform/releases/download/v2.4.0/trading-intelligence_2.4.0_darwin_arm64.tar.gz"
-    sha256 "967e8abaeb7c9675385ea0dde0e1e3c31ce2c39c085c7bfc23cdd7e68c5e1855"
+    url "https://github.com/monkey-trader/trading-intelligence-platform/releases/download/v2.5.0/trading-intelligence_2.5.0_darwin_arm64.tar.gz"
+    sha256 "d8364171375d59bebcb0e09b51ae0e90a0276d40d9f4410261736179c7c0a97b"
 
     define_method(:install) do
       bin.install "trading-intelligence"
+      bin.install "trading-intelligence-mcp"
       (bin/"trading-intelligence-service").write <<~SH
         #!/bin/sh
         ENV_FILE="${HOME}/.config/tip/env"
@@ -46,6 +48,8 @@ class TradingIntelligence < Formula
         printf 'BX_KEY=...\nBX_SECRET=...\n' > ~/.config/tip/env && chmod 600 ~/.config/tip/env
         brew services start trading-intelligence
       API: http://127.0.0.1:3000/health
+      MCP-Server (stdio, liest nur über die API) einbinden:
+        claude mcp add trading-intelligence -e TIP_API_URL=http://127.0.0.1:3000 -- #{opt_bin}/trading-intelligence-mcp
     EOS
   end
 
@@ -58,5 +62,6 @@ class TradingIntelligence < Formula
 
   test do
     assert_predicate bin/"trading-intelligence", :exist?
+    assert_predicate bin/"trading-intelligence-mcp", :exist?
   end
 end
