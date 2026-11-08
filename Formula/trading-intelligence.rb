@@ -5,39 +5,58 @@
 class TradingIntelligence < Formula
   desc "Trading-Journal-Backend mit automatischem BingX-Import (lokale HTTP-API)"
   homepage "https://github.com/monkey-trader/trading-intelligence-platform"
-  version "2.6.0"
-  depends_on :macos
+  version "2.7.0"
 
-  if Hardware::CPU.intel?
-    url "https://github.com/monkey-trader/trading-intelligence-platform/releases/download/v2.6.0/trading-intelligence_2.6.0_darwin_amd64.tar.gz"
-    sha256 "1d3b8f9ac7d075b1959c1579dad9152b16b03bf6ddccfc9f486ed1040c8a5053"
+  on_macos do
+    if Hardware::CPU.intel?
+      url "https://github.com/monkey-trader/trading-intelligence-platform/releases/download/v2.7.0/trading-intelligence_2.7.0_darwin_amd64.tar.gz"
+      sha256 "4632314986959195c77f872ac08afdac1bc1bee3b3c4d3c912db3f7f1ea7b25d"
 
-    define_method(:install) do
-      bin.install "trading-intelligence"
-      bin.install "trading-intelligence-mcp"
-      (bin/"trading-intelligence-service").write <<~SH
-        #!/bin/sh
-        ENV_FILE="${HOME}/.config/tip/env"
-        if [ -f "$ENV_FILE" ]; then set -a; . "$ENV_FILE"; set +a; fi
-        exec "#{opt_bin}/trading-intelligence"
-      SH
-      chmod 0755, bin/"trading-intelligence-service"
+      define_method(:install) do
+        bin.install "trading-intelligence"
+        bin.install "trading-intelligence-mcp"
+        (bin/"trading-intelligence-service").write <<~SH
+          #!/bin/sh
+          ENV_FILE="${HOME}/.config/tip/env"
+          if [ -f "$ENV_FILE" ]; then set -a; . "$ENV_FILE"; set +a; fi
+          exec "#{opt_bin}/trading-intelligence"
+        SH
+        chmod 0755, bin/"trading-intelligence-service"
+      end
+    end
+    if Hardware::CPU.arm?
+      url "https://github.com/monkey-trader/trading-intelligence-platform/releases/download/v2.7.0/trading-intelligence_2.7.0_darwin_arm64.tar.gz"
+      sha256 "69ebd31eed6cd089f8182e8c4a161a75c6006ff6c3676abe0d6717ee1a58550e"
+
+      define_method(:install) do
+        bin.install "trading-intelligence"
+        bin.install "trading-intelligence-mcp"
+        (bin/"trading-intelligence-service").write <<~SH
+          #!/bin/sh
+          ENV_FILE="${HOME}/.config/tip/env"
+          if [ -f "$ENV_FILE" ]; then set -a; . "$ENV_FILE"; set +a; fi
+          exec "#{opt_bin}/trading-intelligence"
+        SH
+        chmod 0755, bin/"trading-intelligence-service"
+      end
     end
   end
-  if Hardware::CPU.arm?
-    url "https://github.com/monkey-trader/trading-intelligence-platform/releases/download/v2.6.0/trading-intelligence_2.6.0_darwin_arm64.tar.gz"
-    sha256 "c2ec620dfe20b7c20bb3450909f67274ac8b6f96ce69c00600dd46898ad145b5"
 
-    define_method(:install) do
-      bin.install "trading-intelligence"
-      bin.install "trading-intelligence-mcp"
-      (bin/"trading-intelligence-service").write <<~SH
-        #!/bin/sh
-        ENV_FILE="${HOME}/.config/tip/env"
-        if [ -f "$ENV_FILE" ]; then set -a; . "$ENV_FILE"; set +a; fi
-        exec "#{opt_bin}/trading-intelligence"
-      SH
-      chmod 0755, bin/"trading-intelligence-service"
+  on_linux do
+    if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
+      url "https://github.com/monkey-trader/trading-intelligence-platform/releases/download/v2.7.0/trading-intelligence_2.7.0_linux_amd64.tar.gz"
+      sha256 "5451f6fa3b5fa0ba3da5701c1b0ae27658a5a9d4b4725a85254261670f1e13b7"
+      define_method(:install) do
+        bin.install "trading-intelligence"
+        bin.install "trading-intelligence-mcp"
+        (bin/"trading-intelligence-service").write <<~SH
+          #!/bin/sh
+          ENV_FILE="${HOME}/.config/tip/env"
+          if [ -f "$ENV_FILE" ]; then set -a; . "$ENV_FILE"; set +a; fi
+          exec "#{opt_bin}/trading-intelligence"
+        SH
+        chmod 0755, bin/"trading-intelligence-service"
+      end
     end
   end
 
