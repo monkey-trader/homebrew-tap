@@ -5,12 +5,12 @@
 class TradingIntelligence < Formula
   desc "Trading-Journal-Backend mit automatischem BingX-Import (lokale HTTP-API)"
   homepage "https://github.com/monkey-trader/trading-intelligence-platform"
-  version "2.7.0"
+  version "2.7.1"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/monkey-trader/trading-intelligence-platform/releases/download/v2.7.0/trading-intelligence_2.7.0_darwin_amd64.tar.gz"
-      sha256 "4632314986959195c77f872ac08afdac1bc1bee3b3c4d3c912db3f7f1ea7b25d"
+      url "https://github.com/monkey-trader/trading-intelligence-platform/releases/download/v2.7.1/trading-intelligence_2.7.1_darwin_amd64.tar.gz"
+      sha256 "4a9c7b37faaaad1b840be398a54f2c2c09993c0e65ae0aa9c4ab3032ce328805"
 
       define_method(:install) do
         bin.install "trading-intelligence"
@@ -25,8 +25,8 @@ class TradingIntelligence < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/monkey-trader/trading-intelligence-platform/releases/download/v2.7.0/trading-intelligence_2.7.0_darwin_arm64.tar.gz"
-      sha256 "69ebd31eed6cd089f8182e8c4a161a75c6006ff6c3676abe0d6717ee1a58550e"
+      url "https://github.com/monkey-trader/trading-intelligence-platform/releases/download/v2.7.1/trading-intelligence_2.7.1_darwin_arm64.tar.gz"
+      sha256 "dc445f8d6653ddb3c17eb48e159b64322e5c952d8a966a0d0db22c521eae01c1"
 
       define_method(:install) do
         bin.install "trading-intelligence"
@@ -44,8 +44,8 @@ class TradingIntelligence < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/monkey-trader/trading-intelligence-platform/releases/download/v2.7.0/trading-intelligence_2.7.0_linux_amd64.tar.gz"
-      sha256 "5451f6fa3b5fa0ba3da5701c1b0ae27658a5a9d4b4725a85254261670f1e13b7"
+      url "https://github.com/monkey-trader/trading-intelligence-platform/releases/download/v2.7.1/trading-intelligence_2.7.1_linux_amd64.tar.gz"
+      sha256 "30ec0c06d25c6ba6ba3d921edbb7aba471b69515929a123357d76dc62f148eb3"
       define_method(:install) do
         bin.install "trading-intelligence"
         bin.install "trading-intelligence-mcp"
